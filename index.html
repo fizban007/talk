@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Radiative Reconnection</title>
+  <link rel="stylesheet" href="./reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="./reveal.js/dist/reveal.css">
+  <!-- <link rel="stylesheet" href="dist/theme/black.css" id="theme"> -->
+  <link rel="stylesheet" href="./reveal.js/dist/theme/custom-white2.css" id="theme">
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="./reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="footer-left" id="footer1" style="display: none;">
+      Alex Y. Chen<br>
+      yuran.chen@colorado.edu
+    </div>
+    <div class="footer-right" id="footer2" style="display: none;">
+      4th Purdue Workshop
+    </div>
+    <div class="slides">
+      <!-- Start the slides here, each slide is in its own <section> -->
+      <section>
+        <div class="title-page" style="font-size: 0.8em;">
+          <h2 style="font-size: 2.6em; padding-top: 2vh">
+            Can Magnetic Reconnection Power TeV Flares from <s>M87</s> Powehi?
+          </h2>
+          <div class="content">
+            <p class="author">
+            Alexander Y. Chen<br>
+            <span>CU Boulder</span></p>
+            <div style="line-height: 70%;">
+              <br>
+            </div>
+            <p class="coauthor">
+             Jason Dexter, Philipp Yao, Dmitri Uzdensky, Mitch Begelman, Yajie Yuan</p>
+            <div style="line-height: 30%;">
+              <br>
+            </div>
+            <p class="institute">4th Purdue Workshop on Relativistic Plasma Astrophysics</p>
+            <!-- <div style="line-height: 60%">
+                 <br>
+                 </div> -->
+            <p class="date">May 11, 2022</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Motivation</h2>
+          <div class="content">
+            <p>M87 has been established as a powerful $\gamma$-ray source.</p>
+            <div class="row">
+              <div class="column" style="width: 35%;">
+                <div class="img-container">
+                  <img src= "figures/m87.jpg">
+                </div>
+              </div>
+              <div class="column" style="width: 65%;">
+                <div class="img-container">
+                  <img src="figures/m87-multiwavelength.png" style="width: 100%;">
+                </div>
+                (Algaba et al 2021)
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Motivation</h2>
+          <div class="content">
+            <p>VHE $\gamma$-ray emission is consistent with the same power law as HE $\gamma$-rays.
+              Overall luminosity $L_\mathrm{\gamma}\sim 10^{41}$ erg/s.</p>
+            <div class="img-container">
+              <img src="figures/m87-spectrum.png" style="width: 60%;">
+            </div>
+            (Abramowski et al 2012)
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Motivation</h2>
+          <div class="content">
+            <p>The VHE $\gamma$-rays are also variable on a short time scale, $t\sim 1$ day. (Acciari et al 2009)
+            </p>
+            <div class="img-container">
+              <img src="figures/multiwavelength-lightcurve.jpeg" style="width: 42%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>MAD Eruptions in GRMHD</h2>
+          <div class="content">
+            <p>GRMHD simulations of BH accretion show regular formation of
+            magnetically dominated bubbles and reconnecting current sheets.</p>
+
+            <div class="r-stack">
+              <div class="fragment fade-out" data-fragment-index="0">
+                <div class="img-container">
+                  <img src= "figures/scepi-mhd-eruption.png" style="width: 80%;">
+                </div>
+                (Scepi et al 2021)
+              </div>
+              <div class="fragment current-visible" data-fragment-index="0">
+                <div class="img-container">
+                  <img src="figures/bart-mhd-eruption.png">
+                </div>
+                (Ripperda et al 2021)
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Environments for Reconnection</h2>
+          <div class="content">
+            <p>We performed GRMHD simulations with Monte Carlo photons to
+            investigate the magnetic and radiation environment around M87 (Yao,
+            AC, et al 2021)</p>
+
+            <!-- <div class="img-container">
+                 <img src= "figures/ebhlight-spectrum.png" style="width: 70%;">
+                 </div> -->
+            <div class="r-stack">
+              <div class="img-container fragment fade-out" data-fragment-index="0">
+                <img src= "figures/ebhlight-spectrum.png" style="width: 80%;">
+              </div>
+              <div class="img-container fragment current-visible" data-fragment-index="0">
+                <img src="figures/photon-energy-density.png" style="width: 80%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Environments for Reconnection</h2>
+          <div class="content">
+            <ul>
+              <li>Magnetic field at the horizon $B_0 \sim 100\,\mathrm{G}$, <mark>$U_B
+                \sim 400\,\mathrm{erg/cm^3}$</mark>.</li>
+              <br>
+              <li>Soft photon energy density near the horizon is quite high for
+                MAD simulations, <mark>$U_\mathrm{rad} \sim 100\,\mathrm{erg/cm^3}$</mark>,
+                even higher close to the equatorial plane. <mark>$\left<\epsilon_\mathrm{ph}\right>\sim
+                10^{-2}\,\mathrm{eV}$</mark></li>
+              <br>
+              <li><mark>$U_B \sim U_\mathrm{rad}$</mark></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Environments for Reconnection</h2>
+          <div class="content">
+            <ul>
+              <li>Assuming a reconnecting region of
+                $r_g^2$ with $v_\mathrm{rec}\sim 0.1c$, this produces a
+                dissipation rate <mark>$\dot{E}\sim 10^{42}\,\mathrm{erg/s}$</mark>.</li><br>
+              <li>The highly magnetized funnel is filled with $e^\pm$ pairs.
+              $\sigma_\mathrm{GJ}\sim 10^{13}$. Realistically pair drizzle can
+              provide a multiplicity of $\mathcal{M}\sim 10^4$ (Wong et al 2021). Lets
+                take <mark>$\sigma \sim 10^9$</mark>.</li><br>
+              <li>Radiation limited Lorentz factor <mark>$\gamma_\mathrm{rad} \sim 10^7 \ll \sigma$</mark>.
+              This is reconnection in the strong cooling regime.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Radiative Reconnection</h2>
+          <div class="content">
+            <p>Goals: study strongly radiative reconnection in the presence of both
+              synchrotron and external Compton cooling</p><br>
+            <ul>
+              <li>What is the reconnection physics? How is particle acceleration
+              affected by radiation?</li><br>
+              <li>What fraction of energy goes into synchrotron vs IC emission?</li><br>
+              <li>What is the resulting photon spectrum? Does it agree with what
+              we see in M87?</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Simulation Setup</h2>
+          <div class="content">
+            <p>2D double periodic box, Harris current sheet. Set upstream $U_B =
+              U_\mathrm{rad}$ so that $\ell_B = \ell_\mathrm{IC}$.</p>
+            <div class="img-container">
+              <img src= "figures/reconnection_initial.png" style="width: 70%;">
+            </div>
+            <p>All simulations resolve the upstream cyclotron frequency. Box
+            resolution is 36864$\times$36864 with 20 ppc. Performed on OLCF Summit.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Plasmoid Compression</h2>
+          <div class="content">
+            <p>Guide field $B_g = 0.25$</p>
+
+            <div class="r-stack" style="font-size: 100%;">
+              <div class="fragment fade-out" data-fragment-index="0">
+                <div class="img-container">
+                  <img src= "figures/rho_grad_sigma_8.png" style="width: 100%;">
+                </div>
+                $\ell_B = \ell_\mathrm{IC} = 0.002, \gamma_\mathrm{rad} = 400, \sigma = 50$
+              </div>
+              <div class="fragment current-visible" data-fragment-index="0">
+                <div class="img-container">
+                  <img src= "figures/rho_grad_sigma_1.png" style="width: 100%;">
+                </div>
+                $\ell_B = \ell_\mathrm{IC} = 0.13, \gamma_\mathrm{rad} = 50, \sigma = 50$
+              </div>
+              <div class="fragment">
+                <div class="img-container">
+                  <img src= "figures/rho_grad_sigma_1_8th.png" style="width: 100%;">
+                </div>
+                $\ell_B = \ell_\mathrm{IC} = 0.36, \gamma_\mathrm{rad} = 50, \sigma = 400$
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Energy Evolution</h2>
+          <div class="content">
+            <div class="img-container">
+              <img src= "figures/energy-history.png" style="width: 70%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Synchrotron vs Inverse Compton</h2>
+          <div class="content">
+            <p>Dependence on guide field</p>
+            <div class="img-container">
+              <img src= "figures/scaling-guide-field.png" style="width: 70%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Synchrotron vs Inverse Compton</h2>
+          <div class="content">
+            <p>Dependence on strength of radiative cooling</p>
+            <div class="img-container">
+              <img src= "figures/scaling-gamma-rad.png" style="width: 70%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Synchrotron vs Inverse Compton Emissivity</h2>
+          <div class="content">
+            <div class="r-stack">
+              <div class="img-container fragment fade-out" data-fragment-index="0">
+                <img src= "figures/emissivity_grad_8.png" style="width: 90%;">
+              </div>
+              <div class="img-container fragment current-visible" data-fragment-index="0">
+                <img src= "figures/emissivity_grad_1.png" style="width: 90%;">
+              </div>
+              <div class="img-container fragment">
+                <img src= "figures/emissivity_grad_1_8th.png" style="width: 90%;">
+              </div>
+            </div>
+          </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Synchrotron vs Inverse Compton</h2>
+          <div class="content" style="font-size: 120%;">
+            <p>In the limit $\gamma_\mathrm{rad} \ll \sigma$, current sheet
+            thickness should scale with $\gamma_\mathrm{rad}\rho_0$ instead of
+            $\sigma\rho_0$. Define $\ell_p = \sigma_T U_\mathrm{rad} (c/\omega_p) / m_ec^2$, then:</p>
+            \[
+            \delta_\mathrm{cs} \sim 0.2\frac{c/\omega_p}{\sigma^{1/4}\ell_\mathrm{p}^{1/2}}
+            \]
+            <p>The cooling length of particles at $\gamma_\mathrm{rad}$ incidentally
+            has the exact same scaling:</p>
+            \[
+            l_\mathrm{cool} \sim \frac{3}{4}\frac{c/\omega_p}{\gamma_\mathrm{rad}\ell_\mathrm{p}} \sim
+            3\frac{c/\omega_p}{\sigma^{1/4}\ell_\mathrm{p}^{1/2}} \sim 15 \delta_\mathrm{cs}
+            \]
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Synchrotron vs Inverse Compton</h2>
+          <div class="content">
+            <p>Since cooling length is comparable to the size of elementary
+            current sheets, energetic particles can't cool significantly before
+            they enter the plasmoids.</p>
+            <br>
+            <p>We expect that even in the regime
+            $\gamma_\mathrm{rad}\ll \sigma$, we still expect significant
+            synchrotron emission.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Particle Spectrum</h2>
+          <div class="content">
+            <div class="img-container">
+              <img src= "figures/ptc_spec_sigma400_grad50.png" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Radiation Spectrum</h2>
+          <div class="content">
+            <div class="img-container">
+              <img src= "figures/spectrum_sigma400_grad50.png" style="width: 80%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content-page">
+          <h2>Back to M87</h2>
+          <div class="content" style="font-size:1.2em;">
+            <ul>
+              <li>If a $\gamma$-ray flare have spectral peak near GeV, then
+              it should produce a synchrotron peak near MeV.</li>
+              <br>
+              <li>Apart from a strong guide field, it is very difficult to
+              suppress the synchrotron emission.</li>
+              <br>
+              <li>Klein-Nishina effects and pair production will also have
+              nontrivial effects on the spectrum</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section>
+           <div class="content-page">
+           <h2>Conclusions</h2>
+           <div class="content" style="font-size:1.2em;">
+           <ul>
+           <li>Using radiative GRMHD simulations, we find that in the vicinity
+           of the black hole in M87, $U_B \sim U_\mathrm{rad}$. Reconnection
+           in this environment is highly radiative.</li>
+           <br>
+           <li>With local PIC simulations of radiative reconnection, we find that
+           ratio of IC vs synchrotron radiation depends on guide field
+           and strength of radiation (even when $U_B = U_\mathrm{rad}$).</li>
+           <br>
+           <li></li>
+           </ul>
+           </div>
+           </div>
+           </section>
+      -->
+    </div>
+  </div>
+  <script src="js/head.min.js"></script>
+  <!-- <script>
+
+       head.js(
+       "vendor/jquery.min.js",
+       "vendor/three.js/build/three.min.js",
+       "vendor/three.js/examples/js/controls/OrbitControls.js",
+       /* "vendor/socket.io-client/dist/socket.io.js", */
+       "vendor/THREE.MeshLine.js",
+       /* "vendor/dat.gui.min.js",*/
+       "vendor/EventEmitter.js",
+       "js/samples.js",
+       );
+       </script> -->
+  <script src="./reveal.js/dist/reveal.js"></script>
+  <script src="./reveal.js/plugin/math/math.js"></script>
+  <script src="./reveal.js/plugin/notes/notes.js"></script>
+  <script src="./reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="./reveal.js/plugin/highlight/highlight.js"></script>
+  <script>
+
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        transition: "fade",
+        slideNumber: true,
+        history: true,
+        center: false,
+        width: "100%",
+        height: "100%",
+        disableLayout: false,
+        // minScale: 1,
+        // maxScale: 1,
+        margin: 0,
+        padding: 0,
+        hash: true,
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          // pass other options into `MathJax.Hub.Config()`
+          TeX: { Macros: { RR: "{\\bf R}" } }
+        },
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
+      });
+      Reveal.addEventListener("slidechanged", function(event) {
+        var foot1 = document.getElementById("footer1");
+        var foot2 = document.getElementById("footer2");
+
+        if (Reveal.getIndices().h === 0) {
+          foot1.style.display = "none";
+          foot2.style.display = "none";
+        } else {
+          foot1.style.display = "block";
+          foot2.style.display = "block";
+        }
+      });
+
+  </script>
+</body>
+</html>
